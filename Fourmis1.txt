@@ -1,0 +1,56 @@
+package istic.prg1.tp3;
+
+public class Fourmis{
+
+    public static String next(String s) {
+
+        s +="0";
+        String str = "";
+        char deb = s.charAt(0);
+        int cpt = 1;
+        for(int i = 0; i< s.length(); i++) {//1122
+            if(s.charAt(i) == deb) {
+                cpt +=1;
+            }
+            else {
+                str +=""+cpt+""+deb;
+                cpt = 1;
+                deb = s.charAt(i);
+                //cpt = 0;
+            }
+        }
+
+        return str;
+    }
+
+    public static void main(String[] args) {
+
+        String u = "1";
+
+        for(int i=0; i< 3; i++) {
+
+            System.out.println("U" + i + " = " + u);
+            u = nextBis(u);
+
+        }
+    }
+
+    private static  String nextBis(String s){
+
+        s+="0";
+        String str = "";
+
+        char deb = s.charAt(0);
+        int cpt = 1;
+        for (int i=1; i< s.length(); i++){
+            if (deb == s.charAt(i))
+                cpt++;
+            else {
+                str += ""+cpt+""+deb;
+                deb = s.charAt(i);
+                cpt = 1;
+            }
+        }
+        return str;
+    }
+}

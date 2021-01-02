@@ -1,0 +1,71 @@
+package istic.prg1.tp3;
+
+/**
+ * 
+ * @author Mickaël Foursov <foursov@univ-rennes1.fr>
+ * @version 5.0
+ * @since 2015-11-10
+ * 
+ *        Classe représentant des doublets non modifiables
+* bsdhb horeb
+ */
+
+public class Pair implements Comparable<Pair> {
+
+	private int x;
+	private int y;
+
+	public Pair(){
+		this.x = 0;
+		this.y = 0;
+	}
+
+	public Pair(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+
+
+	@Override
+	public int compareTo(Pair d) {
+
+		//less
+		if (this.x < d.x || (this.x == d.x && this.y < d.y))
+			return -1;
+
+		//equals
+		else if (this.x == d.x && this.y == d.y)
+			return 0;
+
+		//great
+		return 1;
+	}
+
+	@Override
+	public Pair clone() {
+	    return new Pair(this.x, this.y);
+	}
+
+	@Override
+	public String toString() {
+	    return ""+ this.x + " " + this.y;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Pair)) {
+			return false;
+		}
+		// DERNIER CAS A TRAITER
+
+		Pair other = (Pair) obj;
+
+		return this.x == other.x && this.y == other.y;
+	}
+}

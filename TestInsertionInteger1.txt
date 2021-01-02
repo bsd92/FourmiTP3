@@ -1,0 +1,32 @@
+package istic.prg1.tp3;
+
+public class TestInsertionInteger {
+
+    public static void main(String[] args) {
+
+        InsertionInteger insertionInteger = new InsertionInteger();
+        int[] values = insertionInteger.readFile("src/number.txt");
+
+        for (int i=0; i<values.length; i++)
+            insertionInteger.insert(values[i]);
+
+
+        System.out.println(insertionInteger);
+
+        //insertionInteger.createArray(new Scanner(System.in));
+
+
+
+
+        /*InsertionInteger insertionInteger = new InsertionInteger();
+
+        int val = 0;
+        for (int i =0; i< str.length(); i++){
+            val = (int) str.charAt(i);
+            insertionInteger.insert(val);
+        }*/
+
+
+    }
+
+}

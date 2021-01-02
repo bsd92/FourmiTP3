@@ -1,0 +1,119 @@
+package istic.prg1.tp3;
+
+
+import java.io.File;
+import java.util.Scanner;
+
+public class InsertionPair{
+
+    public static void main(String[] args) {
+        InsertionPair tab = new InsertionPair();
+        tab.createArray(new Scanner(System.in));
+        System.out.println(tab);
+
+        //Pair[] vals = readFile("src/number.txt");
+
+
+       /* for (int i =0; i< vals.length; i++)
+            tab.insert(vals[i]);*/
+
+        //System.out.println(tab);
+
+
+    }
+
+    private static int SIZE_MAX = 10;
+
+    private int size;
+    private Pair[] array = new Pair[SIZE_MAX];
+
+    public InsertionPair(){
+        this.size = 0;
+        for (int i = 0; i< SIZE_MAX; i++){
+            this.array[i] = new Pair();
+        }
+    }
+
+    private boolean insert(Pair pair){
+
+        int i;
+        if (!(search(pair)) && this.size < SIZE_MAX){
+            this.size +=1;
+
+            for (i = this.size; (i > 0) && (this.array[i-1].compareTo(pair) > 0); i--){
+                this.array[i] = this.array[i-1];
+            }
+            this.array[i] = pair;
+            return true;
+        }
+        return false;
+    }
+
+    private Pair[] toArray(){
+
+        Pair[] tab = new Pair[this.size];
+        int j =0;
+        for (int i = 0; i< SIZE_MAX; i++){
+            if (!this.array[i].equals(new Pair(0,0))){
+                tab[j] = this.array[i].clone();
+                j +=1;
+            }
+        }
+        return tab;
+    }
+
+    private boolean search(Pair p){
+
+        for (int i=0; i< this.toArray().length; i++){
+            if (this.toArray()[i].equals(p))
+                return true;
+        }
+        return false;
+    }
+
+    public void createArray(Scanner scanner){
+
+        int x =0, y =0;
+
+        do{
+            x = scanner.nextInt();
+            if (x == -1)
+                return;
+            y = scanner.nextInt();
+            insert(new Pair(x,y));
+        }while (x != -1);
+    }
+
+    private static Pair[] readFile(String filename){
+        StringBuilder data = new StringBuilder();
+        String [] str;
+        try{
+            Scanner sc = new Scanner(new File(filename)).useDelimiter(" ");
+            while (sc.hasNext())
+                data.append(sc.next() + " ");
+
+        }catch (Exception e){
+            System.err.println("Erreur lors de la lecture du fichier");
+        }
+
+        str = data.toString().split(" ");
+        Pair[] values = new Pair[(str.length - 1)/2];
+        int j =0;
+        for (int i =0; i< str.length; i+=2,j++){
+            if (Integer.parseInt(str[i]) != -1)
+                values[j] = new Pair(Integer.parseInt(str[i]),Integer.parseInt(str[i+1]));
+        }
+        return values;
+    }
+
+    @Override
+    public String toString() {
+        String str ="";
+
+        for (int i=0; i< this.toArray().length; i++){
+            str +="" + this.toArray()[i] + "\n";
+        }
+
+        return str;
+    }
+}
